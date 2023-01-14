@@ -1,11 +1,12 @@
 //Import dependencies
-import express from "express"
-import morgan from "morgan"
-import cors from "cors"
-import dotenv from "dotenv"
+require("dotenv").config()
+const express = require("express")
+const morgan = require("morgan")
+const cors = require("cors")
+const mongoose = require("mongoose")
+const DATABASE_URL = process.env.DATABASE_URL
+const PORT = process.env.PORT
 
-//Get env variables
-dotenv.config()
 
 //Create express app
 const app = express()
@@ -15,11 +16,31 @@ app.use(cors())
 app.use(morgan("dev"))
 app.use(express.json())
 
+///////////////////////////////
+// DATABASE CONNECTION
+////////////////////////////////
+mongoose.connect(DATABASE_URL)
+
+mongoose.connection
+  .on("open", () => console.log("You are connected to mongoose"))
+  .on("close", () => console.log("You are disconnected from mongoose"))
+  .on("error", (error) => console.log(error))
+
+///////////////////////////////
+// MODELS
+////////////////////////////////
+
+const BookmarkdSchema = new mongoose.Schema({
+  title: String,
+  url: String
+})
+
+const Bookmarks = mongoose.model("Bookmarks", BookmarkdSchema)
+
 //Routes and routers
 app.get("/", (req, res) => {
   res.send("The route works!")
 })
 
 //Listener
-const PORT = process.env.PORT ?? 4000
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
