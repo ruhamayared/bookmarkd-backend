@@ -4,7 +4,7 @@
 
 ##### Group members: Brandon Haupt, Rae Hebron, Ruhama Yared, Samantha Whitford
 
-####[Trello Board Link](https://trello.com/b/xyWSrbiC/bookmarkd-lab)
+[Trello Board Link](https://trello.com/b/xyWSrbiC/bookmarkd-lab)
 
 ### Technologies Used
 
