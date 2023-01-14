@@ -40,13 +40,5 @@ app.get("/", (req, res) => {
   res.send("The route works!")
 })
 
-
-
-
-
-
-
-
-
 //Listener
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
