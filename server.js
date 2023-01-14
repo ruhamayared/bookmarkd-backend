@@ -4,8 +4,6 @@ import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
 
-//Get env variables
-dotenv.config()
 
 //Create express app
 const app = express()
@@ -15,6 +13,27 @@ const app = express()
 app.use(cors())
 app.use(morgan("dev"))
 app.use(express.json())
+
+///////////////////////////////
+// DATABASE CONNECTION
+////////////////////////////////
+mongoose.connect(DATABASE_URL)
+
+mongoose.connection
+  .on("open", () => console.log("You are connected to mongoose"))
+  .on("close", () => console.log("You are disconnected from mongoose"))
+  .on("error", (error) => console.log(error))
+
+///////////////////////////////
+// MODELS
+////////////////////////////////
+
+const BookmarkdSchema = new mongoose.Schema({
+  title: String,
+  url: String
+})
+
+const Bookmarks = mongoose.model("Bookmarks", BookmarkdSchema)
 
 //Routes and routers
 app.get("/", (req, res) => {
@@ -47,5 +66,4 @@ app.put ('/bookmark/:id', async (req, res) => {
 
 
 //Listener
-const PORT = process.env.PORT ?? 4000
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

@@ -24,10 +24,11 @@
 | 1/14 | First meeting - finish seting up project and create main and dev branch in GitHub. Each member will claim one ticket to start with.|
 | 1/15 - 1/16| Group members work on tickets on their own time. Claim more tickets when done with a ticket. |
 | 1/17 | Class/Group Work Time - discuss what else needs to be done and work on finishing assignment. |
-| ? | Meet to test app and make final changes. Check/test deployed site and submit. |
-| ? | Meet to discuss presentation. |
+| 1/18 - 1/19 | Keep working on project.|
+| 1/20 | Meet to test app and make final changes. Check/test deployed site and submit. Meet to discuss presentation. |
 <!-- prettier-ignore-end -->
 
 ### Link to Project
 
-[Deployed Project Page]()
+[Backend Deployed Project Page](https://bookmarkd-backend-hhwq.onrender.com)
+[Frontend Deployed Project Page](https://bookmarkd-frontend.onrender.com)
