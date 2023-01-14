@@ -7,7 +7,6 @@ const mongoose = require("mongoose")
 const DATABASE_URL = process.env.DATABASE_URL
 const PORT = process.env.PORT
 
-
 //Create express app
 const app = express()
 
@@ -32,7 +31,7 @@ mongoose.connection
 
 const BookmarkdSchema = new mongoose.Schema({
   title: String,
-  url: String
+  url: String,
 })
 
 const Bookmarks = mongoose.model("Bookmarks", BookmarkdSchema)
