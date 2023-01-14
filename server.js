@@ -40,19 +40,10 @@ app.get("/", (req, res) => {
   res.send("The route works!")
 })
 
-// Index Route
-app.get("/bookmarks", async (req, res) => {
-  res.json(await Bookmarks.find({}))
-})
-
-// Create Route
-app.post("/bookmarks", async (req, res) => {
-  res.json(await Bookmarks.create(req.body))
-})
-
 //Listener
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
 
 
 
+// YODA WAS HERE
 // YODA WAS HERE
