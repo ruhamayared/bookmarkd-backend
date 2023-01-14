@@ -47,6 +47,16 @@ app.get("/bookmarks", async (req, res) => {
   res.json(await Bookmarks.find({}))
 })
 
+// Delete Route
+app.delete("/bookmarks/:id", async (req, res) => {
+  res.json(await Bookmarks.findByIdAndRemove(req.params.id))
+})
+
+// Update Route
+app.put("/bookmarks/:id", async (req, res) => {
+  res.json(await Bookmarks.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+})
+
 // Create Route
 app.post("/bookmarks", async (req, res) => {
   res.json(await Bookmarks.create(req.body))
