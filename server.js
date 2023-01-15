@@ -36,19 +36,22 @@ const BookmarkdSchema = new mongoose.Schema({
 
 const Bookmarks = mongoose.model("Bookmarks", BookmarkdSchema)
 
-//Routes and routers
-app.get("/", (req, res) => {
-  res.send("The route works!")
-})
-
 // Index Route
 app.get("/bookmarks", async (req, res) => {
-  res.json(await Bookmarks.find({}))
+  try {
+    res.json(await Bookmarks.find({}))
+  } catch (error) {
+    res.status(400).json(error)
+  }
 })
 
 // Delete Route
 app.delete("/bookmarks/:id", async (req, res) => {
-  res.json(await Bookmarks.findByIdAndRemove(req.params.id))
+  try {
+    res.json(await Bookmarks.findByIdAndRemove(req.params.id))
+  } catch (error) {
+    res.status(400).json(error)
+  }
 })
 
 // Update Route
@@ -58,7 +61,20 @@ app.put("/bookmarks/:id", async (req, res) => {
 
 // Create Route
 app.post("/bookmarks", async (req, res) => {
-  res.json(await Bookmarks.create(req.body))
+  try {
+    res.json(await Bookmarks.create(req.body))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+//Show route -- takes to update page
+app.get("/bookmarks/:id", async (req, res) => {
+  try {
+    res.json(await Bookmarks.findById(req.params.id))
+  } catch (error) {
+    res.status(400).json(error)
+  }
 })
 
 //Listener
