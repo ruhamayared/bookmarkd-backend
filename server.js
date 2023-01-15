@@ -7,7 +7,6 @@ const mongoose = require("mongoose")
 const DATABASE_URL = process.env.DATABASE_URL
 const PORT = process.env.PORT
 
-
 //Create express app
 const app = express()
 
@@ -32,48 +31,48 @@ mongoose.connection
 
 const BookmarkdSchema = new mongoose.Schema({
   title: String,
-  url: String
+  url: String,
 })
 
 const Bookmarks = mongoose.model("Bookmarks", BookmarkdSchema)
 
-//Routes and routers
-app.get("/", (req, res) => {
-  res.send("The route works!")
-})
-
 // Index Route
 app.get("/bookmarks", async (req, res) => {
-  try{
+  try {
     res.json(await Bookmarks.find({}))
-  }catch(error){
+  } catch (error) {
     res.status(400).json(error)
   }
-});
+})
 
 // Delete Route
 app.delete("/bookmarks/:id", async (req, res) => {
-  try{
+  try {
     res.json(await Bookmarks.findByIdAndRemove(req.params.id))
-  }catch(error){
+  } catch (error) {
     res.status(400).json(error)
   }
 })
 
 // Update Route
 app.put("/bookmarks/:id", async (req, res) => {
-  try{
-    res.json(await Bookmarks.findByIdAndUpdate(req.params.id, req.body, {new: true}))
-  }catch(error){
-    res.status(400).json(error)
-  }
+  res.json(await Bookmarks.findByIdAndUpdate(req.params.id, req.body, { new: true }))
 })
 
 // Create Route
 app.post("/bookmarks", async (req, res) => {
-  try{
+  try {
     res.json(await Bookmarks.create(req.body))
-  }catch(error){
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+//Show route -- takes to update page
+app.get("/bookmarks/:id", async (req, res) => {
+  try {
+    res.json(await Bookmarks.findById(req.params.id))
+  } catch (error) {
     res.status(400).json(error)
   }
 })
@@ -81,7 +80,4 @@ app.post("/bookmarks", async (req, res) => {
 //Listener
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
 
-
-
-// YODA WAS HERE
 // YODA WAS HERE
