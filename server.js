@@ -44,22 +44,38 @@ app.get("/", (req, res) => {
 
 // Index Route
 app.get("/bookmarks", async (req, res) => {
-  res.json(await Bookmarks.find({}))
-})
+  try{
+    res.json(await Bookmarks.find({}))
+  }catch(error){
+    res.status(400).json(error)
+  }
+});
 
 // Delete Route
 app.delete("/bookmarks/:id", async (req, res) => {
-  res.json(await Bookmarks.findByIdAndRemove(req.params.id))
+  try{
+    res.json(await Bookmarks.findByIdAndRemove(req.params.id))
+  }catch(error){
+    res.status(400).json(error)
+  }
 })
 
 // Update Route
 app.put("/bookmarks/:id", async (req, res) => {
-  res.json(await Bookmarks.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+  try{
+    res.json(await Bookmarks.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+  }catch(error){
+    res.status(400).json(error)
+  }
 })
 
 // Create Route
 app.post("/bookmarks", async (req, res) => {
-  res.json(await Bookmarks.create(req.body))
+  try{
+    res.json(await Bookmarks.create(req.body))
+  }catch(error){
+    res.status(400).json(error)
+  }
 })
 
 //Listener
@@ -67,4 +83,5 @@ app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
 
 
 
+// YODA WAS HERE
 // YODA WAS HERE
