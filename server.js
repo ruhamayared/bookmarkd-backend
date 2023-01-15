@@ -1,13 +1,15 @@
 //Import dependencies
-import express from "express";
-import morgan from "morgan";
-import cors from "cors";
-import dotenv from "dotenv";
+require("dotenv").config()
+const express = require("express")
+const morgan = require("morgan")
+const cors = require("cors")
+const mongoose = require("mongoose")
+const DATABASE_URL = process.env.DATABASE_URL
+const PORT = process.env.PORT
 
 
 //Create express app
 const app = express()
-
 
 //Register middleware
 app.use(cors())
@@ -38,6 +40,41 @@ const Bookmarks = mongoose.model("Bookmarks", BookmarkdSchema)
 //Routes and routers
 app.get("/", (req, res) => {
   res.send("The route works!")
+})
+
+// Index Route
+app.get("/bookmarks", async (req, res) => {
+  try{
+    res.json(await Bookmarks.find({}))
+  }catch(error){
+    res.status(400).json(error)
+  }
+});
+
+// Delete Route
+app.delete("/bookmarks/:id", async (req, res) => {
+  try{
+    res.json(await Bookmarks.findByIdAndRemove(req.params.id))
+  }catch(error){
+    res.status(400).json(error)
+  }
+})
+
+// Update Route
+app.put("/bookmarks/:id", async (req, res) => {
+  try{
+    res.json(await Bookmarks.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+  }catch(error){
+    res.status(400).json(error)
+  }
+})
+
+// Create Route
+app.post("/bookmarks", async (req, res) => {
+  try{res.json(await Bookmarks.create(req.body))
+  }catch(error){
+    res.status(400).json(error)
+  }
 })
 
 //Listener
