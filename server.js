@@ -71,7 +71,8 @@ app.put("/bookmarks/:id", async (req, res) => {
 
 // Create Route
 app.post("/bookmarks", async (req, res) => {
-  try{res.json(await Bookmarks.create(req.body))
+  try{
+    res.json(await Bookmarks.create(req.body))
   }catch(error){
     res.status(400).json(error)
   }
